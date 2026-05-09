@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彥瑋 ♥ 佳琪 婚禮邀請函</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+TC:wght@400;700&family=Zeyada&family=Dancing+Script:wght@600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --rose-gold: #f4d0cb;
+            --rose-dark: #d4a373;
+            --bg-gradient: linear-gradient(135deg, #fdf1f0 0%, #f4d0cb 50%, #eae2d6 100%);
+        }
+
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: #5a4a4a;
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+        }
+
+        .font-lxgw { font-family: 'LXGW WenKai Lite', sans-serif; }
+        .font-handwriting { font-family: 'Ma Shan Zheng', cursive; }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+        }
+        .heart-pulse {
+            display: inline-block;
+            color: #e5989b;
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(244, 208, 203, 0.3);
+        }
+
+        /* 封面圖跑版修復 */
+        .cover-container {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 手機版優先顯示圖片右側(人像位置) */
+            object-position: 80% center; 
+        }
+
+        @media (min-width: 768px) {
+            .cover-img { object-position: center center; }
+        }
+
+        .cute-timer-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 10px;
+            min-width: 75px;
+            box-shadow: 0 10px 25px rgba(244, 208, 203, 0.5);
+            border: 2px solid #fff;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4a373'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 px-5 py-3 flex justify-between items-center">
+        <div class="text-xl text-[#d4a373] font-lxgw">彥瑋 <span class="heart-pulse text-sm">♥</span> 佳琪</div>
+        <div class="space-x-4 text-[10px] font-bold tracking-widest text-[#a68a8a]">
+            <a href="#details" class="hover:text-[#d4a373]">關於</a>
+            <a href="#location" class="hover:text-[#d4a373]">地點</a>
+            <a href="#rsvp" class="text-[#d4a373] border-b-2 border-[#f4d0cb]">出席</a>
+        </div>
+    </nav>
+
+    <!-- 封面區塊修復 -->
+    <section class="cover-container flex items-end justify-start">
+        <div class="absolute inset-0 z-0">
+            <img src="https://i.postimg.cc/vT1DdyBP/IMG-2440.jpg" alt="婚麗封面" class="cover-img">
+            <div class="absolute inset-0 bg-black/10"></div>
+        </div>
+        <div class="relative z-10 p-8 md:p-12 mb-10">
+            <p class="font-handwriting text-2xl md:text-3xl text-white mb-2 drop-shadow-lg">Truly, Madly, Deeply</p>
+            <h1 class="text-5xl md:text-8xl font-bold text-white tracking-tighter mb-4 drop-shadow-xl font-lxgw">
+                彥瑋 <span class="heart-pulse text-rose-300">♥</span> 佳琪
+            </h1>
+            <div class="flex items-center space-x-3">
+                <div class="h-[1px] w-12 bg-white/60"></div>
+                <p class="text-xs md:text-base tracking-[0.5em] font-medium text-white drop-shadow-md uppercase">2026 . 07 . 19</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 計時器區塊 -->
+    <section id="details" class="py-20 px-6 text-center">
+        <div class="heart-pulse text-2xl mb-4">♥</div>
+        <h2 class="font-lxgw text-2xl mb-10 text-[#d4a373] tracking-widest">我們的幸福倒數</h2>
+        <div class="flex justify-center gap-4">
+            <div class="cute-timer-card"><span id="days" class="text-2xl font-bold text-[#d4a373] block">00</span><span class="text-[9px] uppercase">Days</span></div>
+            <div class="cute-timer-card"><span id="hours" class="text-2xl font-bold text-[#d4a373] block">00</span><span class="text-[9px] uppercase">Hours</span></div>
+            <div class="cute-timer-card"><span id="minutes" class="text-2xl font-bold text-[#d4a373] block">00</span><span class="text-[9px] uppercase">Mins</span></div>
+        </div>
+    </section>
+
+    <!-- 地點區塊 -->
+    <section id="location" class="py-12 px-6">
+        <div class="max-w-xl mx-auto space-y-8">
+            <div class="bg-white/60 backdrop-blur-md p-8 rounded-[2rem] border-l-8 border-[#d4a373] shadow-sm">
+                <h3 class="text-[#d4a373] text-[10px] font-bold mb-3 tracking-[0.2em] uppercase">宴客地點 Location</h3>
+                <p class="text-xl font-bold mb-1">台中李方艾美酒店</p>
+                <p class="text-[#8a7a7a] text-sm">台中市中區建國路111號</p>
+            </div>
+            <div class="bg-white/70 rounded-[2.5rem] overflow-hidden border border-white">
+                <button onclick="toggleAccordion('transport')" class="w-full p-8 text-left flex justify-between items-center outline-none">
+                    <span class="font-bold text-[#8da399] tracking-widest text-[10px] uppercase">交通指引 Transportation</span>
+                    <span id="acc-icon" class="text-lg">+</span>
+                </button>
+                <div id="transport" class="hidden px-8 pb-8 space-y-4">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3640.9238!2d120.6823!3d24.1393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d1746200001%3A0x8677c735e5d3420b!2z5Y-w5Lit5p2O5pa56Im-576O6YWS5bqX!5e0!3m2!1szh-TW!2stw!4v1700000000000" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-3xl"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP 表單區塊 -->
+    <section id="rsvp" class="py-20 px-6">
+        <div class="max-w-md mx-auto bg-white/80 p-8 md:p-12 rounded-[3.5rem] shadow-2xl border-4 border-white">
+            <div class="text-center mb-10">
+                <p class="font-handwriting text-3xl text-[#e5989b] mb-2">Can't wait to see you!</p>
+                <h2 class="text-xl font-bold tracking-widest">出席回函 RSVP</h2>
+            </div>
+
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccess();}"></iframe>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSdZh8EyIsnV1SeeKx09DcRc04ITOYqYs1obArwVwweRXtv-0g/formResponse" method="post" target="hidden_iframe" id="weddingForm" onsubmit="return handleFormSubmit(this)">
+                
+                <div class="mb-8">
+                    <label class="block text-[9px] font-bold text-[#b4a4a4] mb-1 tracking-[0.2em]">姓名 NAME</label>
+                    <input type="text" name="entry.1482369712" required class="w-full bg-transparent border-b border-[#f4d0cb] py-2 focus:border-[#d4a373] outline-none text-base">
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-[9px] font-bold text-[#b4a4a4] mb-1 tracking-[0.2em]">關係 RELATIONSHIP</label>
+                    <select id="rel_select" class="w-full bg-transparent border-b border-[#f4d0cb] py-2 outline-none text-base">
+                        <option value="新郎親友">新郎親友</option>
+                        <option value="新娘親友">新娘親友</option>
+                        <option value="other">其他 (手寫輸入)...</option>
+                    </select>
+                    <div id="other-relationship-wrap" class="mt-4 hidden">
+                        <input type="text" id="rel_other_input" class="w-full bg-transparent border-b border-[#f4d0cb] py-1 outline-none text-sm" placeholder="請填寫關係">
+                    </div>
+                    <input type="hidden" name="entry.1431945946" id="real_rel_entry">
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-[9px] font-bold text-[#b4a4a4] mb-1 tracking-[0.2em]">出席意願 ATTENDANCE</label>
+                    <select id="attendance_select" name="entry.1161041930" required class="w-full bg-transparent border-b border-[#f4d0cb] py-2 outline-none text-base">
+                        <option value="是，我會準時出席">是，我會準時出席</option>
+                        <option value="否，無法出席，祝福你們">否，無法出席，祝福你們</option>
+                    </select>
+                </div>
+
+                <div id="guest_count_wrap" class="mb-8">
+                    <label class="block text-[9px] font-bold text-[#b4a4a4] mb-1 tracking-[0.2em]">出席總人數 TOTAL GUESTS</label>
+                    <select id="guest_count" name="entry.982880244" class="w-full bg-transparent border-b border-[#f4d0cb] py-2 outline-none text-base">
+                        <script>for(let i=1;i<=10;i++) document.write(`<option value="${i}">${i} 位</option>`)</script>
+                    </select>
+                </div>
+
+                <div id="conditional-fields" class="hidden">
+                    <div class="p-6 bg-white/40 rounded-[2.5rem] border border-white space-y-6 mb-10 shadow-sm">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[9px] text-[#d4a373] font-bold mb-1 uppercase">葷食</label>
+                                <select name="entry.2042930033" class="w-full bg-transparent border-b border-[#f4d0cb] py-1 outline-none text-sm">
+                                    <script>for(let i=0;i<=10;i++) document.write(`<option value="${i}">${i}</option>`)</script>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[9px] text-[#d4a373] font-bold mb-1 uppercase">素食</label>
+                                <select name="entry.348747956" class="w-full bg-transparent border-b border-[#f4d0cb] py-1 outline-none text-sm">
+                                    <script>for(let i=0;i<=10;i++) document.write(`<option value="${i}">${i}</option>`)</script>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-[#d4a373] font-bold mb-1 uppercase">兒童椅</label>
+                            <select name="entry.984101902" class="w-full bg-transparent border-b border-[#f4d0cb] py-1 outline-none text-sm">
+                                <script>for(let i=0;i<=5;i++) document.write(`<option value="${i}">${i}</option>`)</script>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-[#e5989b] font-bold mb-1 uppercase">特殊需求</label>
+                            <select id="req_select" class="w-full bg-transparent border-b border-[#f4d0cb] py-1 outline-none text-sm">
+                                <option value="無">無</option>
+                                <option value="海鮮過敏">海鮮過敏</option>
+                                <option value="不吃牛">不吃牛</option>
+                                <option value="輪椅需求">輪椅需求</option>
+                                <option value="other">其他手寫...</option>
+                            </select>
+                            <div id="other-requirement-wrap" class="mt-4 hidden">
+                                <textarea id="req_other_input" class="w-full bg-white/50 rounded-2xl p-4 border border-[#f4d0cb] outline-none text-xs" rows="2" placeholder="請補充..."></textarea>
+                            </div>
+                            <input type="hidden" name="entry.1464732811" id="real_req_entry">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <label class="block text-[9px] font-bold text-[#b4a4a4] mb-3 tracking-[0.2em]">祝福留言 MESSAGE</label>
+                    <textarea name="entry.572273114" rows="2" class="w-full bg-white/40 rounded-3xl p-6 border-2 border-[#f4d0cb] focus:border-[#d4a373] outline-none text-sm italic"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-5 text-white font-bold tracking-[0.5em] shadow-xl bg-gradient-to-r from-[#d4a373] to-[#e5989b] rounded-3xl active:scale-95 transition-all">送出祝福</button>
+            </form>
+
+            <div id="success-msg" class="hidden text-center py-16">
+                <div class="heart-pulse text-5xl mb-6">♥</div>
+                <h3 class="text-2xl font-bold text-[#d4a373] mb-2">回函已送出</h3>
+                <p class="text-[#a68a8a] italic text-sm">期待與您見面！</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 text-center text-[#c4b4b4] text-[9px] tracking-[0.5em] uppercase font-lxgw">
+        彥瑋 <span class="heart-pulse mx-1">♥</span> 佳琪<br>
+        Wedding 2026
+    </footer>
+
+    <script>
+        const targetDate = new Date("July 19, 2026 11:30:00").getTime();
+        function updateTimer() {
+            const now = new Date().getTime();
+            const dist = targetDate - now;
+            if (dist > 0) {
+                document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('hidden');
+            document.getElementById('acc-icon').innerText = content.classList.contains('hidden') ? '+' : '−';
+        }
+
+        const attendanceSelect = document.getElementById('attendance_select');
+        const guestInput = document.getElementById('guest_count');
+        const guestCountWrap = document.getElementById('guest_count_wrap');
+        const condFields = document.getElementById('conditional-fields');
+
+        function updateFormDisplay() {
+            const isAttending = attendanceSelect.value === '是，我會準時出席';
+            guestCountWrap.style.display = isAttending ? 'block' : 'none';
+            if (isAttending) condFields.classList.remove('hidden');
+            else condFields.classList.add('hidden');
+        }
+        attendanceSelect.addEventListener('change', updateFormDisplay);
+        updateFormDisplay();
+
+        const relSelect = document.getElementById('rel_select');
+        relSelect.addEventListener('change', () => { 
+            document.getElementById('other-relationship-wrap').classList.toggle('hidden', relSelect.value !== 'other'); 
+        });
+
+        const reqSelect = document.getElementById('req_select');
+        reqSelect.addEventListener('change', () => { 
+            document.getElementById('other-requirement-wrap').classList.toggle('hidden', reqSelect.value !== 'other'); 
+        });
+
+        let submitted = false;
+        function handleFormSubmit(form) {
+            document.getElementById('real_rel_entry').value = (relSelect.value === 'other') ? document.getElementById('rel_other_input').value : relSelect.value;
+            document.getElementById('real_req_entry').value = (reqSelect.value === 'other') ? document.getElementById('req_other_input').value : reqSelect.value;
+            submitted = true;
+            return true;
+        }
+
+        function showSuccess() {
+            document.getElementById('weddingForm').style.display = 'none';
+            document.getElementById('success-msg').classList.remove('hidden');
+            document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
