@@ -30,9 +30,8 @@
         }
         .heart-pulse { display: inline-block; color: #e5989b; animation: heartbeat 1.5s infinite ease-in-out; }
 
-        /* 封面高度固定，不跑版 */
         .cover-section {
-            height: 78vh;
+            height: 50vh; 
             position: relative;
             overflow: hidden;
             display: flex;
@@ -44,37 +43,100 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: 80% center; 
+            object-position: center 20%; 
             z-index: 0;
         }
         .cover-content {
             position: relative;
             z-index: 10;
-            padding: 2.5rem 1.5rem;
+            padding: 1.5rem 1.5rem 1rem 1.5rem; 
             width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+            text-align: left;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
         }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 
-        /* 防止手機縮放跑版：強制 16px */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: 2px solid #f4d0cb;
+        }
+        .music-icon { width: 20px; height: 20px; fill: #d4a373; }
+        .rotating { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
         select, input, textarea {
             background: transparent !important;
-            border-bottom: 1px solid #f4d0cb !important;
+            border-bottom: 2px solid #f4d0cb !important;
             border-radius: 0 !important;
             outline: none !important;
-            font-size: 16px !important; 
+            font-size: 20px !important; 
             width: 100%;
+            padding: 12px 0;
+            color: #5a4a4a;
+            margin-bottom: 15px;
+            display: block;
         }
-        
+        .form-label {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #5a4a4a !important;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
         .form-card {
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             border: 4px solid #fff;
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             border-radius: 2.5rem;
         }
+        .grid-fixed { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .info-label {
+            display: inline-block;
+            background: #d4a373;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .floor-box {
+            border: 2px solid #d4a373;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .small-note {
+            font-size: 11px !important;
+            color: #b4a4a4;
+            font-weight: normal;
+            margin-left: 4px;
+        }
     </style>
 </head>
-<body>
+<body onclick="autoPlayMusic()">
+    <div class="music-control" id="musicBtn" onclick="toggleMusic(event)">
+        <svg class="music-icon" id="musicIcon" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://www.dropbox.com/scl/fi/43j1ezq2cojnj17bwpse6/feat-selina.mp3?rlkey=5zk8efai0gpv06buwxee79t1d&st=ef44d78c&dl=1" type="audio/mpeg">
+        </audio>
+    </div>
+
     <nav class="fixed top-0 w-full z-50 px-5 py-3 flex justify-between items-center bg-white/70 backdrop-blur-md border-b border-rose-100">
         <div class="text-xl text-[#d4a373] font-lxgw font-bold">彥瑋 ♥ 佳琪</div>
         <div class="space-x-4 text-[10px] font-bold tracking-widest text-[#a68a8a]">
@@ -86,30 +148,66 @@
     <section class="cover-section">
         <img src="https://i.postimg.cc/vT1DdyBP/IMG-2440.jpg" alt="婚禮照片" class="cover-img">
         <div class="cover-content text-white">
-            <p class="font-handwriting text-2xl mb-1">Truly, Madly, Deeply</p>
-            <h1 class="text-5xl font-bold tracking-tighter mb-4 font-lxgw">彥瑋 <span class="heart-pulse">♥</span> 佳琪</h1>
-            <p class="text-xs tracking-[0.4em] uppercase">2026 . 07 . 19</p>
+            <p class="font-handwriting text-2xl mb-1 opacity-95 text-shadow">Truly, Madly, Deeply</p>
+            <h1 class="text-4xl font-bold tracking-tight mb-2 font-lxgw text-shadow">彥瑋 <span class="heart-pulse">♥</span> 佳琪</h1>
+            <p class="text-[12px] tracking-[0.5em] uppercase opacity-90 text-shadow">2026 . 07 . 19</p>
         </div>
     </section>
 
-    <section id="details" class="py-12 px-6 text-center">
-        <div class="flex justify-center gap-4">
-            <div class="bg-white rounded-2xl p-4 min-w-[75px] shadow-sm"><span id="days" class="text-2xl font-bold text-[#d4a373]">00</span><br><span class="text-[9px]">DAYS</span></div>
-            <div class="bg-white rounded-2xl p-4 min-w-[75px] shadow-sm"><span id="hours" class="text-2xl font-bold text-[#d4a373]">00</span><br><span class="text-[9px]">HOURS</span></div>
-            <div class="bg-white rounded-2xl p-4 min-w-[75px] shadow-sm"><span id="minutes" class="text-2xl font-bold text-[#d4a373]">00</span><br><span class="text-[9px]">MINS</span></div>
-        </div>
-    </section>
-
-    <section id="location" class="py-10 px-6">
-        <div class="max-w-md mx-auto space-y-6">
-            <div class="bg-white/70 p-8 rounded-[2rem] border-l-8 border-[#d4a373] shadow-sm">
-                <h3 class="text-[#d4a373] text-[10px] font-bold mb-2 tracking-widest uppercase">Wedding Venue</h3>
-                <p class="text-2xl font-bold mb-1">台中李方艾美酒店</p>
-                <p class="text-[#8a7a7a] text-sm">台中市中區建國路111號</p>
-                <a href="https://maps.app.goo.gl/oYxX8rS5zX6" target="_blank" class="inline-block mt-4 text-[#d4a373] text-xs font-bold border-b border-[#d4a373]">開啟導航查看 ➔</a>
+    <section id="details" class="py-12 px-2 text-center">
+        <div class="flex justify-center gap-2 mb-10">
+            <div class="bg-white rounded-3xl p-5 min-w-[85px] shadow-md">
+                <span id="days" class="text-4xl font-black text-[#d4a373]">00</span>
+                <br>
+                <span class="text-[10px] font-bold tracking-tighter uppercase">Days</span>
             </div>
-            <div class="rounded-3xl overflow-hidden shadow-lg">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.898!2d120.682137!3d24.13784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d1421043f11%3A0xc38d8794c4897282!2z5Y-w5Lit5p2O5pa56Im-576O6YWS5bqX!5e0!3m2!1szh-TW!2stw!4v1715000000000" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="bg-white rounded-3xl p-5 min-w-[85px] shadow-md">
+                <span id="hours" class="text-4xl font-black text-[#d4a373]">00</span>
+                <br>
+                <span class="text-[10px] font-bold tracking-tighter uppercase">Hours</span>
+            </div>
+            <div class="bg-white rounded-3xl p-5 min-w-[85px] shadow-md">
+                <span id="minutes" class="text-4xl font-black text-[#d4a373]">00</span>
+                <br>
+                <span class="text-[10px] font-bold tracking-tighter uppercase">Mins</span>
+            </div>
+            <div class="bg-white rounded-3xl p-5 min-w-[85px] shadow-md border-2 border-rose-50">
+                <span id="seconds" class="text-4xl font-black text-[#e5989b]">00</span>
+                <br>
+                <span class="text-[10px] font-bold tracking-tighter uppercase">Secs</span>
+            </div>
+        </div>
+
+        <div id="location" class="max-w-md mx-auto space-y-6">
+            <div class="bg-white/70 p-8 rounded-[2rem] border-t-8 border-[#d4a373] shadow-sm text-center">
+                <h3 class="text-[#d4a373] text-[10px] font-bold mb-2 tracking-widest uppercase">Wedding Venue</h3>
+                <p class="text-xl font-bold mb-1">2026.07.19 午宴</p>
+                <p class="text-xl font-bold mb-1">農曆六月初六</p>
+                <p class="text-xl font-bold mb-4">11:30入席 12:00開席</p>
+                
+                <p class="text-xl font-bold mb-1">台中市中區建國路111號</p>
+                <p class="text-xl font-bold mb-6">台中李方艾美酒店&nbsp;&nbsp;星空廳1&nbsp;&nbsp;<span class="floor-box">21樓</span></p>
+                
+                <div class="space-y-4 text-sm border-t border-rose-100 pt-6 text-left">
+                    <div>
+                        <span class="info-label font-lxgw">🚂 火車路線</span>
+                        <p class="text-[#5a4a4a] leading-relaxed">抵達台中火車站 → 由站前出口(往舊站方向)步行約 3 分鐘即可到達飯店。</p>
+                    </div>
+                    <div>
+                        <span class="info-label font-lxgw">🚗 開車路線</span>
+                        <p class="text-[#5a4a4a] leading-relaxed">
+                            由國道一號台中交流道 (178K) 出口下交流道 → 沿台灣大道往市區方向直行 → 行經台中火車站 → 建國路右轉約 100 公尺 → 飯店大門及地下停車場入口即位於您的右側。
+                        </p>
+                    </div>
+                    <div>
+                        <span class="info-label font-lxgw">🅿️ 停車資訊</span>
+                        <p class="text-[#5a4a4a] leading-relaxed">飯店設有專屬地下停車場 (B3-B6)，賓客用餐可享免費停車優惠，請於餐後向飯店櫃檯折抵。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="rounded-3xl overflow-hidden shadow-lg border-4 border-white">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.898!2d120.682137!3d24.13784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d1421043f11%3A0xc38d8794c4897282!2z5Y-w5Lit5p2O5pa56Im-576O6YWS5bqX!5e0!3m2!1szh-TW!2stw!4v1715000000000" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -118,96 +216,80 @@
         <div class="max-w-md mx-auto form-card p-8">
             <div class="text-center mb-10">
                 <p class="font-handwriting text-2xl text-[#e5989b] mb-1">Welcome to our wedding</p>
-                <h2 class="text-xl font-bold tracking-widest text-[#5a4a4a]">出席回函 RSVP</h2>
+                <h2 class="text-xl font-bold tracking-widest text-[#5a4a4a]">出席回函</h2>
             </div>
 
-            <!-- 關鍵：hidden_iframe 用於接收送出後的跳轉，防止頁面跑掉 -->
             <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){showSuccess();}"></iframe>
             
             <form action="https://docs.google.com/forms/d/e/1FAIpQLSdZh8EyIsnV1SeeKx09DcRc04ITOYqYs1obArwVwweRXtv-0g/formResponse" method="post" target="hidden_iframe" id="weddingForm" onsubmit="return handleFormSubmit()">
-                
-                <!-- 姓名 (1482369712) -->
-                <div class="mb-6">
-                    <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">您的姓名 Name</label>
-                    <input type="text" name="entry.1482369712" required>
+                <div class="mb-2">
+                    <label class="form-label">您的姓名</label>
+                    <input type="text" name="entry.1482369712" required placeholder="請輸入姓名">
                 </div>
-
-                <!-- 聯絡電話 (852634498) -->
-                <div class="mb-6">
-                    <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">聯絡電話 Phone</label>
+                <div class="mb-2">
+                    <label class="form-label">聯絡電話</label>
                     <input type="tel" name="entry.852634498" required placeholder="請輸入電話">
                 </div>
-
-                <!-- 關係 (1431945946) -->
-                <div class="mb-6">
-                    <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">關係 Relationship</label>
+                <div class="mb-2">
+                    <label class="form-label">您的關係</label>
                     <select id="rel_select">
                         <option value="新郎親友">新郎親友</option>
                         <option value="新娘親友">新娘親友</option>
-                        <option value="other">其他 (手寫)...</option>
+                        <option value="other">其他 (備註)...</option>
                     </select>
-                    <input type="text" id="rel_other" placeholder="請填寫關係" class="mt-2 hidden">
-                    <!-- 這是真正傳送到後台的隱藏欄位 -->
+                    <input type="text" id="rel_other" placeholder="請備註您的關係" class="mt-2 hidden">
                     <input type="hidden" name="entry.1431945946" id="real_rel">
                 </div>
-
-                <!-- 出席意願 (1161041930) -->
-                <div class="mb-6">
-                    <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">出席意願 Attendance</label>
+                <div class="mb-2">
+                    <label class="form-label">出席意願</label>
                     <select id="att_select" name="entry.1161041930" required>
                         <option value="是，我會準時出席">是，我會準時出席</option>
                         <option value="否，無法出席，祝福你們">否，無法出席，祝福你們</option>
                     </select>
                 </div>
-
                 <div id="attending_fields">
-                    <!-- 總人數 (982880244) -->
-                    <div class="mb-6">
-                        <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">出席總人數 Total Guests</label>
+                    <div class="mb-2">
+                        <label class="form-label">出席總人數</label>
                         <select name="entry.982880244">
                             <script>for(let i=1;i<=10;i++) document.write(`<option value="${i}">${i} 位</option>`)</script>
                         </select>
                     </div>
-
-                    <!-- 葷素小孩椅網格 (不跑版強化) -->
-                    <div class="mb-6">
-                        <label class="block text-[10px] font-bold text-[#b4a4a4] mb-2 text-center uppercase">餐點與需求詳情</label>
-                        <div class="grid grid-cols-3 gap-2 bg-white/50 p-4 rounded-2xl border border-rose-100">
-                            <div class="text-center">
-                                <label class="text-[9px] text-[#d4a373] font-bold block mb-1">葷食</label>
-                                <select name="entry.2042930033"><script>for(let i=0;i<=10;i++) document.write(`<option value="${i}">${i}</option>`)</script></select>
-                            </div>
-                            <div class="text-center border-x border-rose-100">
-                                <label class="text-[9px] text-[#d4a373] font-bold block mb-1">素食</label>
-                                <select name="entry.348747956"><script>for(let i=0;i<=10;i++) document.write(`<option value="${i}">${i}</option>`)</script></select>
+                    <div class="mb-6 bg-white/50 p-6 rounded-3xl border-2 border-rose-100">
+                        <label class="block text-xs font-bold text-[#b4a4a4] mb-4 text-center uppercase tracking-[0.2em]">餐點與細項統計</label>
+                        <div class="grid-fixed">
+                            <div class="text-center border-r border-rose-100">
+                                <label class="text-sm text-[#d4a373] font-bold block mb-1">素食</label>
+                                <select name="entry.348747956" style="font-size: 18px !important;"><script>for(let i=0;i<=10;i++) document.write(`<option value="${i}">${i}</option>`)</script></select>
                             </div>
                             <div class="text-center">
-                                <label class="text-[9px] text-[#d4a373] font-bold block mb-1">小孩椅</label>
-                                <select name="entry.984101902"><script>for(let i=0;i<=5;i++) document.write(`<option value="${i}">${i}</option>`)</script></select>
+                                <label class="text-sm text-[#d4a373] font-bold block mb-1">小孩椅</label>
+                                <select name="entry.984101902" style="font-size: 18px !important;"><script>for(let i=0;i<=5;i++) document.write(`<option value="${i}">${i}</option>`)</script></select>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 特殊需求 (1464732811) -->
-                    <div class="mb-6">
-                        <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">特殊需求 (如過敏/不吃牛)</label>
-                        <input type="text" name="entry.1464732811" placeholder="如：不吃牛、海鮮過敏">
+                    <div class="mb-2">
+                        <label class="form-label">特殊需求</label>
+                        <select id="need_select">
+                            <option value="無特別需求">無特別需求</option>
+                            <option value="不吃牛">不吃牛</option>
+                            <option value="對海鮮過敏">對海鮮過敏</option>
+                            <option value="other">其他特殊需求 (備註)...</option>
+                        </select>
+                        <input type="text" id="need_other" placeholder="請輸入特殊需求備註" class="mt-2 hidden">
+                        <input type="hidden" name="entry.1464732811" id="real_need">
                     </div>
                 </div>
-
-                <!-- 悄悄話 (572273114) -->
                 <div class="mb-8">
-                    <label class="block text-[10px] font-bold text-[#b4a4a4] mb-1 uppercase tracking-widest">給我們的悄悄話</label>
-                    <textarea name="entry.572273114" rows="2" class="italic"></textarea>
+                    <label class="form-label flex items-baseline">給我們的悄悄話 <span class="small-note">(自由填寫)</span></label>
+                    <textarea name="entry.572273114" rows="2" placeholder="留下您的祝福..." class="italic"></textarea>
                 </div>
-
-                <button type="submit" class="w-full py-4 text-white font-bold tracking-[0.4em] shadow-xl bg-gradient-to-r from-[#d4a373] to-[#e5989b] rounded-2xl active:scale-95 transition-all">送出祝福</button>
+                <button type="submit" class="w-full py-5 text-white font-bold tracking-[0.4em] shadow-xl bg-gradient-to-r from-[#d4a373] to-[#e5989b] rounded-2xl active:scale-95 transition-all text-xl">送出祝福</button>
             </form>
-
             <div id="success-msg" class="hidden text-center py-12">
                 <div class="heart-pulse text-5xl mb-6">♥</div>
-                <h3 class="text-xl font-bold text-[#d4a373]">回函已送出</h3>
-                <p class="text-xs text-[#a68a8a] mt-2 italic">期待現場與您分享喜悅！</p>
+                <h3 class="text-2xl font-bold text-[#d4a373]">回函已送出</h3>
+                <p class="text-sm text-[#a68a8a] mt-2 italic">感謝您的祝福，期待現場相見！</p>
+                <button onclick="location.reload()" class="mt-8 text-sm text-gray-400 border-b border-gray-300">重新填寫</button>
             </div>
         </div>
     </section>
@@ -217,6 +299,34 @@
     </footer>
 
     <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+        let hasInteracted = false;
+
+        function autoPlayMusic() {
+            if (!hasInteracted) {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.classList.add('rotating');
+                    hasInteracted = true;
+                }).catch(e => console.log("播放受限"));
+            }
+        }
+
+        function toggleMusic(e) {
+            e.stopPropagation();
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('rotating');
+            } else {
+                bgMusic.play();
+                musicIcon.classList.add('rotating');
+            }
+            isPlaying = !isPlaying;
+            hasInteracted = true; 
+        }
+
         const targetDate = new Date("July 19, 2026 11:30:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
@@ -225,6 +335,12 @@
                 document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
                 document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
                 document.getElementById("minutes").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            } else {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
             }
         }
         setInterval(updateTimer, 1000);
@@ -234,16 +350,25 @@
         const attFields = document.getElementById('attending_fields');
         const relSelect = document.getElementById('rel_select');
         const relOther = document.getElementById('rel_other');
+        const needSelect = document.getElementById('need_select');
+        const needOther = document.getElementById('need_other');
 
-        attSelect.onchange = () => attFields.style.display = (attSelect.value.includes('否')) ? 'none' : 'block';
-        relSelect.onchange = () => relOther.classList.toggle('hidden', relSelect.value !== 'other');
+        attSelect.onchange = () => {
+            attFields.style.display = (attSelect.value.includes('否')) ? 'none' : 'block';
+        };
+        relSelect.onchange = () => {
+            relOther.classList.toggle('hidden', relSelect.value !== 'other');
+        };
+        needSelect.onchange = () => {
+            needOther.classList.toggle('hidden', needSelect.value !== 'other');
+        };
 
         let submitted = false;
         function handleFormSubmit() {
-            // 提交前強制把關係值寫入隱藏欄位
             const realRelInput = document.getElementById('real_rel');
-            realRelInput.value = (relSelect.value === 'other') ? relOther.value : relSelect.value;
-            
+            realRelInput.value = (relSelect.value === 'other') ? (relOther.value || "其他親友") : relSelect.value;
+            const realNeedInput = document.getElementById('real_need');
+            realNeedInput.value = (needSelect.value === 'other') ? (needOther.value || "無特別需求") : needSelect.value;
             submitted = true;
             return true; 
         }
