@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>彥瑋 ♥ 佳琪 婚禮邀請函</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --rose-gold: #fdf1f0; --rose-accent: #f4d0cb; --gold-dark: #d4a373; }
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background: linear-gradient(135deg, #fdf1f0 0%, #f4d0cb 50%, #eae2d6 100%);
+            background-attachment: fixed;
+            color: #5a4a4a;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+        .font-lxgw { font-family: 'LXGW WenKai Lite', sans-serif; }
+        .font-handwriting { font-family: 'Ma Shan Zheng', cursive; }
+        @keyframes heartbeat { 0%, 28% { transform: scale(1); } 14% { transform: scale(1.1); } }
+        .heart-pulse { display: inline-block; color: #e5989b; animation: heartbeat 1.5s infinite ease-in-out; }
+        .cover-section { height: 50vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; background-color: #f4d0cb; }
+        .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; z-index: 0; }
+        .cover-content { position: relative; z-index: 10; padding: 1.5rem; width: 100%; text-align: left; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .music-control { position: fixed; bottom: 20px; right: 20px; z-index: 100; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid #f4d0cb; }
+        .music-icon { width: 20px; height: 20px; fill: #d4a373; }
+        .rotating { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        select, input, textarea { background: transparent !important; border-bottom: 2px solid #f4d0cb !important; border-radius: 0 !important; outline: none !important; font-size: 20px !important; width: 100%; padding: 12px 0; color: #5a4a4a; margin-bottom: 15px; display: block; }
+        .form-label { font-size: 20px !important; font-weight: 700 !important; color: #5a4a4a !important; display: block; margin-bottom: 6px; }
+        .form-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 4px solid #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-radius: 2.5rem; }
+        .info-label { display: inline-block; background: #d4a373; color: white; padding: 4px 10px; border-radius: 8px; font-size: 14px; margin-bottom: 6px; }
+    </style>
+</head>
+<body onclick="autoPlayMusic()" ontouchstart="autoPlayMusic()">
+
+    <div class="music-control" id="musicBtn" onclick="toggleMusic(event)">
+        <svg class="music-icon" id="musicIcon" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://www.dropbox.com/scl/fi/43j1ezq2cojnj17bwpse6/feat-selina.mp3?rlkey=5zk8efai0gpv06buwxee79t1d&st=ef44d78c&dl=1" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 px-5 py-3 flex justify-between items-center bg-white/70 backdrop-blur-md border-b border-rose-100">
+        <div class="text-xl text-[#d4a373] font-lxgw font-bold">彥瑋 ♥ 佳琪</div>
+        <div class="space-x-4 text-[10px] font-bold tracking-widest text-[#a68a8a]">
+            <a href="#location">地點</a>
+            <a href="#rsvp" class="text-[#d4a373]">出席回函</a>
+        </div>
+    </nav>
+
+    <section class="cover-section">
+        <img src="https://i.postimg.cc/vT1DdyBP/IMG-2440.jpg" alt="婚禮照片" class="cover-img" onerror="this.src='https://placehold.co/800x400/f4d0cb/5a4a4a?text=Our+Wedding'">
+        <div class="cover-content text-white">
+            <p class="font-handwriting text-2xl mb-1 text-shadow">Truly, Madly, Deeply</p>
+            <h1 class="text-4xl font-bold tracking-tight mb-2 font-lxgw text-shadow">彥瑋 <span class="heart-pulse">♥</span> 佳琪</h1>
+            <p class="text-[12px] tracking-[0.5em] uppercase opacity-90 text-shadow">2026 . 07 . 19</p>
+        </div>
+    </section>
+
+    <section class="py-12 px-2 text-center">
+        <div class="flex justify-center gap-2 mb-10">
+            <div class="bg-white rounded-3xl p-5 min-w-[80px] shadow-md"><span id="days" class="text-3xl font-black text-[#d4a373]">00</span><br><span class="text-[10px] uppercase">Days</span></div>
+            <div class="bg-white rounded-3xl p-5 min-w-[80px] shadow-md"><span id="hours" class="text-3xl font-black text-[#d4a373]">00</span><br><span class="text-[10px] uppercase">Hours</span></div>
+            <div class="bg-white rounded-3xl p-5 min-w-[80px] shadow-md"><span id="minutes" class="text-3xl font-black text-[#d4a373]">00</span><br><span class="text-[10px] uppercase">Mins</span></div>
+            <div class="bg-white rounded-3xl p-5 min-w-[80px] shadow-md border-2 border-rose-100"><span id="seconds" class="text-3xl font-black text-[#e5989b]">00</span><br><span class="text-[10px] uppercase">Secs</span></div>
+        </div>
+
+        <div id="location" class="max-w-md mx-auto space-y-6">
+            <div class="bg-white/70 p-8 rounded-[2rem] border-t-8 border-[#d4a373] shadow-sm">
+                <h3 class="text-[#d4a373] text-[10px] font-bold mb-2 tracking-widest uppercase">Wedding Venue</h3>
+                <p class="text-xl font-bold">2026.07.19 午宴 (11:30入席)</p>
+                <p class="text-xl font-bold mb-4">台中李方艾美酒店 21樓星空廳</p>
+                <div class="text-left space-y-4 text-sm border-t pt-6">
+                    <div><span class="info-label">🚂 火車</span><p>台中火車站站前出口步行 3 分鐘。</p></div>
+                    <div><span class="info-label">🅿️ 停車</span><p>飯店 B3-B6 專屬停車場，賓客享免費停車。</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-10 px-4 pb-32">
+        <div class="max-w-md mx-auto form-card p-8">
+            <div class="text-center mb-10">
+                <p class="font-handwriting text-2xl text-[#e5989b]">Welcome to our wedding</p>
+                <h2 class="text-xl font-bold tracking-widest">出席回函</h2>
+            </div>
+
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){showSuccess();}"></iframe>
+            
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSdZh8EyIsnV1SeeKx09DcRc04ITOYqYs1obArwVwweRXtv-0g/formResponse" method="post" target="hidden_iframe" id="weddingForm" onsubmit="window.submitted=true; return handleFormSubmit()">
+                <div><label class="form-label">您的姓名</label><input type="text" name="entry.1482369712" required></div>
+                <div><label class="form-label">聯絡電話</label><input type="tel" name="entry.852634498" required></div>
+                <div>
+                    <label class="form-label">您的關係</label>
+                    <select id="rel_select" onchange="toggleOther('rel_select', 'rel_other')">
+                        <option value="新郎親友">新郎親友</option><option value="新娘親友">新娘親友</option><option value="other">其他...</option>
+                    </select>
+                    <input type="text" id="rel_other" placeholder="請輸入關係" class="hidden">
+                    <input type="hidden" name="entry.1431945946" id="real_rel">
+                </div>
+                <div>
+                    <label class="form-label">出席意願</label>
+                    <select id="att_select" name="entry.1161041930" onchange="document.getElementById('attending_fields').style.display=(this.value.includes('否')?'none':'block')">
+                        <option value="是，我會準時出席">是，我會準時出席</option><option value="否，無法出席，祝福你們">否，無法出席，祝福你們</option>
+                    </select>
+                </div>
+                <div id="attending_fields">
+                    <div><label class="form-label">出席總人數</label><select name="entry.1318378330" id="total_people_select"></select></div>
+                    <div class="grid grid-cols-2 gap-4 bg-white/50 p-4 rounded-2xl mb-4">
+                        <div><label class="text-sm font-bold text-[#d4a373]">素食人數</label><select name="entry.348747956" id="veg_select"></select></div>
+                        <div><label class="text-sm font-bold text-[#d4a373]">小孩椅</label><select name="entry.984101902" id="chair_select"></select></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label">特殊需求</label>
+                    <select id="need_select" onchange="toggleOther('need_select', 'need_other')">
+                        <option value="無特別需求">無特別需求</option><option value="不吃牛">不吃牛</option><option value="other">其他...</option>
+                    </select>
+                    <input type="text" id="need_other" placeholder="請輸入需求" class="hidden">
+                    <input type="hidden" name="entry.1464732811" id="real_need">
+                </div>
+                <div><label class="form-label">給我們的悄悄話</label><textarea name="entry.572273114" rows="2"></textarea></div>
+                <button type="submit" class="w-full py-5 text-white font-bold bg-gradient-to-r from-[#d4a373] to-[#e5989b] rounded-2xl shadow-lg active:scale-95 transition-all">送出祝福</button>
+            </form>
+            <div id="success-msg" class="hidden text-center py-12">
+                <div class="heart-pulse text-5xl mb-4">♥</div>
+                <h3 class="text-2xl font-bold text-[#d4a373]">回函已送出</h3>
+                <p class="text-sm mt-2">期待現場相見！</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 初始化下拉選單 (替代 document.write)
+        function initSelect(id, max, suffix='') {
+            const el = document.getElementById(id);
+            if(!el) return;
+            for(let i=0; i<=max; i++) {
+                if(i===0 && id==='total_people_select') continue; 
+                let opt = document.createElement('option');
+                opt.value = i; opt.innerHTML = i + suffix;
+                el.appendChild(opt);
+            }
+        }
+        initSelect('total_people_select', 10, ' 位');
+        initSelect('veg_select', 10);
+        initSelect('chair_select', 5);
+
+        // 音樂控制
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+        function autoPlayMusic() {
+            if (!window.hasInteracted) {
+                bgMusic.play().then(() => {
+                    isPlaying = true; musicIcon.classList.add('rotating'); window.hasInteracted = true;
+                }).catch(() => {});
+            }
+        }
+        function toggleMusic(e) {
+            e.stopPropagation();
+            if (isPlaying) { bgMusic.pause(); musicIcon.classList.remove('rotating'); }
+            else { bgMusic.play(); musicIcon.classList.add('rotating'); }
+            isPlaying = !isPlaying; window.hasInteracted = true;
+        }
+
+        // 倒數計時
+        const targetDate = new Date("July 19, 2026 11:30:00").getTime();
+        function updateTimer() {
+            const diff = targetDate - new Date().getTime();
+            if (diff > 0) {
+                document.getElementById("days").innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+            }
+        }
+        setInterval(updateTimer, 1000); updateTimer();
+
+        // 表單處理
+        function toggleOther(sid, oid) {
+            document.getElementById(oid).classList.toggle('hidden', document.getElementById(sid).value !== 'other');
+        }
+        function handleFormSubmit() {
+            const getVal = (sid, oid, def) => document.getElementById(sid).value === 'other' ? (document.getElementById(oid).value || def) : document.getElementById(sid).value;
+            document.getElementById('real_rel').value = getVal('rel_select', 'rel_other', '親友');
+            document.getElementById('real_need').value = getVal('need_select', 'need_other', '無');
+            return true;
+        }
+        function showSuccess() {
+            document.getElementById('weddingForm').classList.add('hidden');
+            document.getElementById('success-msg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
